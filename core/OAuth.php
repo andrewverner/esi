@@ -34,43 +34,49 @@ class OAuth
 
     public function getToken($code)
     {
+        /**
+         * @var $cURL cURL
+         */
+        $cURL = ESI::app()->curl;
         $params = ESI::app()->params;
         $url = $this->_host . '/token';
         $base64 = base64_encode("{$this->_clientId}:{$params['secret_key']}");
 
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, [
+        return $cURL->data([
             'grant_type' => 'authorization_code',
             'code' => $code
-        ]);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        ])->header([
             "Authorization: Basic {$base64}"
-        ]);
-        $result = curl_exec($ch);
-
-        return curl_errno($ch) ? null : json_decode($result);
+        ])->send($url);
     }
 
     public function refreshToken($refreshToken)
     {
+        /**
+         * @var $cURL cURL
+         */
+        $cURL = ESI::app()->curl;
         $params = ESI::app()->params;
         $url = $this->_host . '/token';
         $base64 = base64_encode("{$this->_clientId}:{$params['secret_key']}");
 
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, [
+        return $cURL->data([
             'grant_type' => 'refresh_token',
             'refresh_token' => $refreshToken
-        ]);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        ])->header([
             "Authorization: Basic {$base64}"
-        ]);
-        $result = curl_exec($ch);
+        ])->send($url);
+    }
 
-        return curl_errno($ch) ? null : json_decode($result);
+    public function getCharacterID()
+    {
+
+    }
+
+    private function scopes()
+    {
+        return [
+            ''
+        ];
     }
 }
