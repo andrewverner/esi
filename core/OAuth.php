@@ -68,9 +68,14 @@ class OAuth
         ])->send($url);
     }
 
-    public function getCharacterID()
+    public function getCharacterID($accessToken)
     {
+        $cURL = ESI::app()->curl;
+        $url = $this->_host . '/verify';
 
+        return $cURL->method(cURL::METHOD_GET)->header([
+            "Authorization: Bearer {$accessToken}"
+        ])->send($url);
     }
 
     private function scopes()
