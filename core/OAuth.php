@@ -48,12 +48,29 @@ class OAuth
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             "Authorization: Basic {$base64}"
         ]);
-
         $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'CURL_ERROR';
-        }
 
-        return curl_errno($ch) ? null : $result;
+        return curl_errno($ch) ? null : json_decode($result);
+    }
+
+    public function refreshToken($refreshToken)
+    {
+        $params = ESI::app()->params;
+        $url = $this->_host . '/token';
+        $base64 = base64_encode("{$this->_clientId}:{$params['secret_key']}");
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, [
+            'grant_type' => 'refresh_token',
+            'refresh_token' => $refreshToken
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Authorization: Basic {$base64}"
+        ]);
+        $result = curl_exec($ch);
+
+        return curl_errno($ch) ? null : json_decode($result);
     }
 }
