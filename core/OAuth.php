@@ -29,7 +29,7 @@ class OAuth
             'scope' => 'characterContactsRead'
         ]);
 
-        echo $url;
+        return $url;
     }
 
     public function getToken($code)
