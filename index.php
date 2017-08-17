@@ -14,7 +14,8 @@ spl_autoload_register(function ($className) {
     }
 });
 
-\ESC\ESI::app()->oauth->auth();
 if (isset($_REQUEST['code'])) {
     var_dump(\ESC\ESI::app()->oauth->getToken($_REQUEST['code']));
+} else {
+    Header("Location: " . \ESC\ESI::app()->oauth->auth());
 }

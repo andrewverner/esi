@@ -39,21 +39,25 @@ class OAuth
         $base64 = base64_encode("{$this->_clientId}:{$params['secret_key']}");
 
         $ch = curl_init($url);
+        echo 1;
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, [
             'grant_type' => 'authorization_code',
             'code' => $code
         ]);
+        echo 2;
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             "Authorization: Basic {$base64}",
             'Content-Type: application/json'
         ]);
 
+        echo 3;
         $result = curl_exec($ch);
         if (curl_errno($ch)) {
             echo 'CURL_ERROR';
         }
+        echo 4;
         return curl_errno($ch) ? null : $result;
     }
 }
