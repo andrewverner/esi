@@ -5,9 +5,6 @@ namespace ESC\core;
 /**
  * Class cURL
  * @package ESC\core
- * @method method($method)
- * @method data($data)
- * @method header($header)
  */
 
 class cURL
@@ -21,9 +18,21 @@ class cURL
     private $data;
     private $header;
 
-    public function __call($name, $arguments)
+    public function data($data)
     {
-        $this->{$name} = $arguments[0];
+        $this->data = $data;
+        return $this;
+    }
+
+    public function method($method)
+    {
+        $this->method = $method;
+        return $this;
+    }
+
+    public function header($header)
+    {
+        $this->header = $header;
         return $this;
     }
 
