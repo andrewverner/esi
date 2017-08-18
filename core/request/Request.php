@@ -9,6 +9,6 @@ class Request
 
     public function getUrl()
     {
-        return $this->url;
+        return "{$this->host}{$this->url}";
     }
 }
