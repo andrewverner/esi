@@ -5,7 +5,7 @@ namespace ESC\core;
 use ESC\ESI;
 use ESC\request\Request;
 
-class RESTFul
+class RESTful
 {
     public function send(Request $request)
     {
