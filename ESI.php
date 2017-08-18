@@ -2,6 +2,10 @@
 
 namespace ESC;
 
+/**
+ * Class ESI
+ * @package ESC
+ */
 class ESI
 {
     const PARAM_HOST_NAME = 'host_name';

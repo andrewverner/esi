@@ -15,7 +15,7 @@ spl_autoload_register(function ($className) {
     }
 });
 
-if (isset($_REQUEST['code'])) {
+/*if (isset($_REQUEST['code'])) {
     var_dump(\ESC\ESI::app()->oauth->getToken($_REQUEST['code']));
 } elseif (isset($_REQUEST['token'])) {
     var_dump(\ESC\ESI::app()->oauth->refreshToken($_REQUEST['token']));
@@ -23,6 +23,8 @@ if (isset($_REQUEST['code'])) {
     var_dump(\ESC\ESI::app()->oauth->getCharacterID($_REQUEST['accessToken']));
 } else {
     Header("Location: " . \ESC\ESI::app()->oauth->auth());
-}
+}*/
+
+var_dump(\ESC\ESI::app()->rest->send(new \ESC\request\alliance\Alliances()));
 ?>
 </pre>
