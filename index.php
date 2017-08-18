@@ -25,6 +25,6 @@ spl_autoload_register(function ($className) {
     Header("Location: " . \ESC\ESI::app()->oauth->auth());
 }*/
 
-var_dump(\ESC\ESI::app()->rest->send(new \ESC\request\alliance\Alliances()));
+var_dump(\ESC\ESI::app()->rest->send(new \ESC\request\alliance\AlliancesNames([99007037, 99007590, 2004363804])));
 ?>
 </pre>
