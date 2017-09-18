@@ -2,7 +2,6 @@
 
 namespace ESC\request\alliance;
 
-use ESC\core\cURL;
 use ESC\request\Request;
 
 class AlliancesNames extends Request

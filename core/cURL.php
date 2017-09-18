@@ -1,6 +1,9 @@
 <?php
 
 namespace ESC\core;
+use ESC\core\logger\ILoggerTransport;
+use ESC\core\logger\Logger;
+use ESC\core\logger\LoggerFileTransport;
 
 /**
  * Class cURL
@@ -21,6 +24,8 @@ class cURL
     private $data;
     private $header;
 
+    private $logger;
+
     public function __call($name, $arguments)
     {
         $this->{$name} = $arguments[0];
@@ -29,6 +34,8 @@ class cURL
 
     public function send($url)
     {
+        $this->getLogger()->log('Sending request');
+
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -43,14 +50,38 @@ class cURL
         }
 
         if ($this->data) {
+            $this->getLogger()->log('Data: ' . print_r($this->data, true));
             curl_setopt($ch, CURLOPT_POSTFIELDS, $this->data);
         }
 
         if ($this->header) {
+            $this->getLogger()->log('Headers: ' . print_r($this->header, true));
             curl_setopt($ch, CURLOPT_HTTPHEADER, $this->header);
         }
 
         $result = curl_exec($ch);
-        return curl_errno($ch) ? null : json_decode($result);
+
+        if (curl_errno($ch)) {
+            $this->getLogger()->log('Curl error #' . curl_errno($ch) . ': ' . curl_error($ch), ILoggerTransport::LEVEL_ERROR);
+            return null;
+        }
+
+        $this->getLogger()->log("Response: {$result}");
+        $data = json_decode($result);
+
+        if (isset($data->error)) {
+            throw new \Exception($data->error, 500);
+        }
+
+        return $data;
+    }
+
+    private function getLogger()
+    {
+        if (is_null($this->logger)) {
+            $this->logger = new Logger(new LoggerFileTransport());
+        }
+
+        return $this->logger;
     }
 }

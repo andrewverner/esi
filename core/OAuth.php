@@ -18,7 +18,7 @@ class OAuth
         $this->_clientId = $params['client_id'];
     }
 
-    public function auth()
+    public function auth(array $scope = [])
     {
         $params = ESI::app()->params;
 
@@ -26,7 +26,7 @@ class OAuth
             'response_type' => 'code',
             'redirect_uri' => $params['sso_oauth_redirect_url'],
             'client_id' => $this->_clientId,
-            'scope' => 'characterContactsRead'
+            'scope' => implode(' ', $scope)
         ]);
 
         return $url;
