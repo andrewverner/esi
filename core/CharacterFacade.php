@@ -6,9 +6,15 @@ use ESC\ESI;
 use ESC\request\characters\CharacterAgentsResearchRequest;
 use ESC\request\characters\CharacterBlueprintsRequest;
 use ESC\request\characters\CharacterChatChannelsRequest;
+use ESC\request\characters\CharacterContactsNotificationsRequest;
 use ESC\request\characters\CharacterCorporationHistoryRequest;
+use ESC\request\characters\CharacterFatigueRequest;
+use ESC\request\characters\CharacterMedalsRequest;
+use ESC\request\characters\CharacterNotificationsRequest;
 use ESC\request\characters\CharacterRequest;
+use ESC\request\characters\CharacterRolesRequest;
 use ESC\request\characters\CharactersNamesRequest;
+use ESC\request\characters\CharacterStandingsRequest;
 
 class CharacterFacade implements ICharacterFacade
 {
@@ -59,5 +65,35 @@ class CharacterFacade implements ICharacterFacade
     public function corporationHistory()
     {
         return $this->esi->rest->call(new CharacterCorporationHistoryRequest($this->id));
+    }
+
+    public function fatigue()
+    {
+        return $this->esi->rest->authorizedCall(new CharacterFatigueRequest($this->id), $this->token);
+    }
+
+    public function medals()
+    {
+        return $this->esi->rest->authorizedCall(new CharacterMedalsRequest($this->id), $this->token);
+    }
+
+    public function notifications()
+    {
+        return $this->esi->rest->authorizedCall(new CharacterNotificationsRequest($this->id), $this->token);
+    }
+
+    public function contactsNotifications()
+    {
+        return $this->esi->rest->authorizedCall(new CharacterContactsNotificationsRequest($this->id), $this->token);
+    }
+
+    public function roles()
+    {
+        return $this->esi->rest->authorizedCall(new CharacterRolesRequest($this->id), $this->token);
+    }
+
+    public function standings()
+    {
+        return $this->esi->rest->authorizedCall(new CharacterStandingsRequest($this->id), $this->token);
     }
 }
