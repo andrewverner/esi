@@ -2,6 +2,8 @@
 
 namespace ESC\request;
 
+use ESC\response\struct\Struct;
+
 class Request
 {
     const METHOD_GET = 'GET';
@@ -26,5 +28,19 @@ class Request
     public function response($data)
     {
         return $data;
+    }
+
+    protected function responseList($data, $instance)
+    {
+        if (empty($data)) {
+            return null;
+        }
+
+        $list = [];
+        foreach ($data as $item) {
+            $list[] = new $instance($item);
+        }
+
+        return $list;
     }
 }

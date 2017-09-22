@@ -4,7 +4,10 @@ namespace ESC\core;
 
 use ESC\ESI;
 use ESC\request\characters\CharacterAgentsResearchRequest;
+use ESC\request\characters\CharacterAssetsRequest;
 use ESC\request\characters\CharacterBlueprintsRequest;
+use ESC\request\characters\CharacterBookmarksRequest;
+use ESC\request\characters\CharacterCalendarRequest;
 use ESC\request\characters\CharacterChatChannelsRequest;
 use ESC\request\characters\CharacterContactsNotificationsRequest;
 use ESC\request\characters\CharacterCorporationHistoryRequest;
@@ -95,5 +98,20 @@ class CharacterFacade implements ICharacterFacade
     public function standings()
     {
         return $this->esi->rest->authorizedCall(new CharacterStandingsRequest($this->id), $this->token);
+    }
+
+    public function assets()
+    {
+        return $this->esi->rest->authorizedCall(new CharacterAssetsRequest($this->id), $this->token);
+    }
+
+    public function bookmarks()
+    {
+        return $this->esi->rest->authorizedCall(new CharacterBookmarksRequest($this->id), $this->token);
+    }
+
+    public function calendar()
+    {
+        return $this->esi->rest->authorizedCall(new CharacterCalendarRequest($this->id), $this->token);
     }
 }

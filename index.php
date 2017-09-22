@@ -71,7 +71,12 @@ if (isset($_REQUEST['code'])) {
             'esi-characters.read_medals.v1',
             'esi-characters.read_notifications.v1',
             'esi-characters.read_corporation_roles.v1',
-            'esi-characters.read_standings.v1'
+            'esi-characters.read_standings.v1',
+            'esi-assets.read_assets.v1',
+            'esi-bookmarks.read_character_bookmarks.v1',
+            'esi-clones.read_clones.v1',
+            'esi-clones.read_implants.v1',
+            'esi-characters.read_contacts.v1',
         ])
     );*/
 }
