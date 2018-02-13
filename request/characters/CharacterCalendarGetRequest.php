@@ -4,10 +4,8 @@ namespace ESC\request\characters;
 
 use ESC\request\Request;
 
-class CharacterCalendarRequest extends Request
+class CharacterCalendarGetRequest extends Request
 {
-    public $type = Request::METHOD_GET;
-
     public function __construct($characterId)
     {
         $this->url = "/characters/{$characterId}/calendar/";

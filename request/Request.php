@@ -2,7 +2,7 @@
 
 namespace ESC\request;
 
-use ESC\response\struct\Struct;
+use ESC\core\sorter\ISorter;
 
 class Request
 {
@@ -14,6 +14,12 @@ class Request
     private $host = 'https://esi.tech.ccp.is/latest';
     protected $url;
     protected $type = 'GET';
+    protected $data = [];
+
+    /**
+     * @var ISorter
+     */
+    protected $sorter = null;
 
     public function getUrl()
     {
@@ -23,6 +29,11 @@ class Request
     public function getType()
     {
         return $this->type;
+    }
+
+    public function getData()
+    {
+        return $this->data;
     }
 
     public function response($data)
@@ -41,6 +52,6 @@ class Request
             $list[] = new $instance($item);
         }
 
-        return $list;
+        return isset($this->sorter) ? $this->sorter->sort($list) : $list;
     }
 }

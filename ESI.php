@@ -8,10 +8,6 @@ namespace ESC;
  */
 class ESI
 {
-    const PARAM_HOST_NAME = 'host_name';
-    const PARAM_SSO_REDIRECT_URI = 'sso_oauth_redirect_url';
-    const PARAM_CLIENT_ID = 'sso_oauth_redirect_url';
-
     private static $_instance;
     public $params;
 

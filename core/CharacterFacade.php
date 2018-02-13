@@ -2,22 +2,24 @@
 
 namespace ESC\core;
 
+use ESC\core\sorter\ISorter;
 use ESC\ESI;
-use ESC\request\characters\CharacterAgentsResearchRequest;
-use ESC\request\characters\CharacterAssetsRequest;
-use ESC\request\characters\CharacterBlueprintsRequest;
-use ESC\request\characters\CharacterBookmarksRequest;
-use ESC\request\characters\CharacterCalendarRequest;
-use ESC\request\characters\CharacterChatChannelsRequest;
-use ESC\request\characters\CharacterContactsNotificationsRequest;
-use ESC\request\characters\CharacterCorporationHistoryRequest;
-use ESC\request\characters\CharacterFatigueRequest;
-use ESC\request\characters\CharacterMedalsRequest;
-use ESC\request\characters\CharacterNotificationsRequest;
-use ESC\request\characters\CharacterRequest;
-use ESC\request\characters\CharacterRolesRequest;
-use ESC\request\characters\CharactersNamesRequest;
-use ESC\request\characters\CharacterStandingsRequest;
+use ESC\request\characters\CharacterAgentsResearchGetRequest;
+use ESC\request\characters\CharacterAssetsGetRequest;
+use ESC\request\characters\CharacterAssetsLocationsPostRequest;
+use ESC\request\characters\CharacterBlueprintsGetRequest;
+use ESC\request\characters\CharacterBookmarksGetRequest;
+use ESC\request\characters\CharacterCalendarGetRequest;
+use ESC\request\characters\CharacterChatChannelsGetRequest;
+use ESC\request\characters\CharacterContactsNotificationsGetRequest;
+use ESC\request\characters\CharacterCorporationHistoryGetRequest;
+use ESC\request\characters\CharacterFatigueGetRequest;
+use ESC\request\characters\CharacterMedalsGetRequest;
+use ESC\request\characters\CharacterNotificationsGetRequest;
+use ESC\request\characters\CharacterGetRequest;
+use ESC\request\characters\CharacterRolesGetRequest;
+use ESC\request\characters\CharactersNamesGetRequest;
+use ESC\request\characters\CharacterStandingsGetRequest;
 
 class CharacterFacade implements ICharacterFacade
 {
@@ -40,78 +42,84 @@ class CharacterFacade implements ICharacterFacade
         $this->token = $token;
     }
 
-    public function names($ids)
+    public function names(array $ids)
     {
-        return $this->esi->rest->call(new CharactersNamesRequest($ids));
+        return $this->esi->rest->call(new CharactersNamesGetRequest($ids));
     }
 
-    public function details()
+    public function details($id = null)
     {
-        return $this->esi->rest->call(new CharacterRequest($this->id));
+        $id = $id ?: $this->id;
+        return $this->esi->rest->call(new CharacterGetRequest($id));
     }
 
     public function agentsResearch()
     {
-        return $this->esi->rest->authorizedCall(new CharacterAgentsResearchRequest($this->id), $this->token);
+        return $this->esi->rest->authorizedCall(new CharacterAgentsResearchGetRequest($this->id), $this->token);
     }
 
-    public function blueprints()
+    public function blueprints(ISorter $sorter = null)
     {
-        return $this->esi->rest->authorizedCall(new CharacterBlueprintsRequest($this->id), $this->token);
+        return $this->esi->rest->authorizedCall(new CharacterBlueprintsGetRequest($this->id, $sorter), $this->token);
     }
 
     public function chatChannels()
     {
-        return $this->esi->rest->authorizedCall(new CharacterChatChannelsRequest($this->id), $this->token);
+        return $this->esi->rest->authorizedCall(new CharacterChatChannelsGetRequest($this->id), $this->token);
     }
 
     public function corporationHistory()
     {
-        return $this->esi->rest->call(new CharacterCorporationHistoryRequest($this->id));
+        return $this->esi->rest->call(new CharacterCorporationHistoryGetRequest($this->id));
     }
 
     public function fatigue()
     {
-        return $this->esi->rest->authorizedCall(new CharacterFatigueRequest($this->id), $this->token);
+        return $this->esi->rest->authorizedCall(new CharacterFatigueGetRequest($this->id), $this->token);
     }
 
     public function medals()
     {
-        return $this->esi->rest->authorizedCall(new CharacterMedalsRequest($this->id), $this->token);
+        return $this->esi->rest->authorizedCall(new CharacterMedalsGetRequest($this->id), $this->token);
     }
 
     public function notifications()
     {
-        return $this->esi->rest->authorizedCall(new CharacterNotificationsRequest($this->id), $this->token);
+        return $this->esi->rest->authorizedCall(new CharacterNotificationsGetRequest($this->id), $this->token);
     }
 
     public function contactsNotifications()
     {
-        return $this->esi->rest->authorizedCall(new CharacterContactsNotificationsRequest($this->id), $this->token);
+        return $this->esi->rest->authorizedCall(new CharacterContactsNotificationsGetRequest($this->id), $this->token);
     }
 
     public function roles()
     {
-        return $this->esi->rest->authorizedCall(new CharacterRolesRequest($this->id), $this->token);
+        return $this->esi->rest->authorizedCall(new CharacterRolesGetRequest($this->id), $this->token);
     }
 
     public function standings()
     {
-        return $this->esi->rest->authorizedCall(new CharacterStandingsRequest($this->id), $this->token);
+        return $this->esi->rest->authorizedCall(new CharacterStandingsGetRequest($this->id), $this->token);
     }
 
-    public function assets()
+    public function assets(ISorter $sorter = null)
     {
-        return $this->esi->rest->authorizedCall(new CharacterAssetsRequest($this->id), $this->token);
+        return $this->esi->rest->authorizedCall(new CharacterAssetsGetRequest($this->id, $sorter), $this->token);
     }
 
-    public function bookmarks()
+    public function bookmarks(ISorter $sorter = null)
     {
-        return $this->esi->rest->authorizedCall(new CharacterBookmarksRequest($this->id), $this->token);
+        return $this->esi->rest->authorizedCall(new CharacterBookmarksGetRequest($this->id, $sorter), $this->token);
     }
 
     public function calendar()
     {
-        return $this->esi->rest->authorizedCall(new CharacterCalendarRequest($this->id), $this->token);
+        return $this->esi->rest->authorizedCall(new CharacterCalendarGetRequest($this->id), $this->token);
+    }
+
+    public function assetsLocations(array $ids)
+    {
+        return $this->esi->rest->authorizedCall(new CharacterAssetsLocationsPostRequest($this->id, $ids), $this->token);
     }
 }

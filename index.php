@@ -16,7 +16,8 @@ spl_autoload_register(function ($className) {
             'response/alliance',
             'response/characters',
             'response/struct',
-            'core/logger'
+            'core/logger',
+            'core/sorter'
         ];
         foreach ($dirs as $dir) {
             if (file_exists(getcwd() . "/{$dir}/{$className}.php")) {
@@ -26,7 +27,7 @@ spl_autoload_register(function ($className) {
     }
 });
 
-set_exception_handler(function (Exception $exception) {
+set_exception_handler(function ($exception) {
     $code = $exception->getCode();
     $message = $exception->getMessage();
     $file = $exception->getFile();
@@ -36,21 +37,19 @@ set_exception_handler(function (Exception $exception) {
 MSG;
 
     echo $msg;
-
 });
 
 if (isset($_REQUEST['code'])) {
     print_r(\ESC\ESI::app()->oauth->getToken($_REQUEST['code']));
 } elseif (isset($_REQUEST['token'])) {
-    print_r(\ESC\ESI::app()->oauth->refreshToken('z0YYQqQROAwMuLnWlg3O_MUhyC3lSWDMOVnVBX0VTlkOX19UOtGv_u97yJSPSZ7CXWjV_dajPlVn04vWa95WwQ2'));
+    print_r(\ESC\ESI::app()->oauth->refreshToken(''));
 } elseif (isset($_REQUEST['access_token'])) {
     print_r(\ESC\ESI::app()->oauth->getCharacterID($_REQUEST['access_token']));
 } else {
     $character = new \ESC\core\CharacterFacade(656916134);
-    //print_r($character->details());
-    //print_r($character->names([656916134, 534122154, 523375194, 653213313, 90230044]));
-    $character->setToken('5KdID9tzGffiszDdsP_pdFZ5xW1sHcvJL6pK7-zKcK-IwXPCeMPKZ-KbSKbHr8gEKdDgFC3S01YXbqrFS8fGIg2');
-    //z0YYQqQROAwMuLnWlg3O_MUhyC3lSWDMOVnVBX0VTlkOX19UOtGv_u97yJSPSZ7CXWjV_dajPlVn04vWa95WwQ2
+    $character->setToken('');
+    //$character->details();
+    //$character->names([656916134, 534122154, 523375194, 653213313, 90230044]);
     //$character->agentsResearch());
     //$character->blueprints());
     //$character->chatChannels();
@@ -61,6 +60,8 @@ if (isset($_REQUEST['code'])) {
     //$character->contactsNotifications();
     //$character->roles();
     //$character->standings();
+    //print_r($character->assets());
+    print_r($character->assetsLocations([1016499019528, 1794091545, 899694798]));
 
     /*Header("Location: " . \ESC\ESI::app()->oauth->auth([
             'characterContactsRead',
@@ -79,8 +80,26 @@ if (isset($_REQUEST['code'])) {
             'esi-characters.read_contacts.v1',
         ])
     );*/
+
+    $allianceFacade = new \ESC\core\AllianceFacade();
+    //$allianceFacade->alliances();
+    //$allianceFacade->names([1354830081, 99005338, 498125261, 99003500, 99003214]);
+    $allianceFacade->setId(1354830081);
+    //$allianceFacade->details();
+    //$allianceFacade->corporations();
+    //$allianceFacade->icons();
+    //print_r($allianceFacade->icons());
+    //print_r($allianceFacade->icons());
+    //print_r($allianceFacade->icons());
+    //print_r($allianceFacade->icons());
+    //print_r($allianceFacade->icons());
+    //print_r($allianceFacade->icons());
+    //print_r($allianceFacade->icons());
+    //print_r($allianceFacade->icons());
+    //print_r($allianceFacade->icons());
+    //print_r($allianceFacade->icons());
 }
 
-//var_dump(\ESC\ESI::app()->rest->call(new \ESC\request\alliance\Alliances()));
+//var_dump(\ESC\ESI::app()->rest->call(new \ESC\request\alliance\AlliancesGetRequest()));
 ?>
 </pre>

@@ -4,7 +4,7 @@ namespace ESC\request\alliance;
 
 use ESC\request\Request;
 
-class Alliances extends Request
+class AlliancesGetRequest extends Request
 {
     public $url = '/alliances/';
 }

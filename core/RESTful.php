@@ -19,8 +19,11 @@ class RESTful
          * @var $cURL cURL
          */
         $cURL = ESI::app()->curl;
-        $response = $cURL->method($request->getType())
-            ->send($request->getUrl());
+        $cURL->method($request->getType());
+        if ($request->getType() == Request::METHOD_POST && !empty($request->getData())) {
+            $cURL->data($request->getData());
+        }
+        $response = $cURL->send($request->getUrl());
 
         return $request->response($response);
     }
