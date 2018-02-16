@@ -2,7 +2,7 @@
 
 namespace ESC\core;
 
-interface ICharacterFacade
+interface IAlliancesFacade
 {
 
 }

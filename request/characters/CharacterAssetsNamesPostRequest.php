@@ -10,13 +10,13 @@ namespace ESC\request\characters;
 
 use ESC\request\Request;
 
-class CharacterAssetsLocationsPostRequest extends Request
+class CharacterAssetsNamesPostRequest extends Request
 {
     public $type = Request::METHOD_POST;
 
     public function __construct($id, array $ids)
     {
-        $this->url = "/characters/{$id}/assets/locations/";
+        $this->url = "/characters/{$id}/assets/names/";
         $this->data = json_encode($ids);
     }
 }

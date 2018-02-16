@@ -10,4 +10,5 @@ class AssetStruct extends Struct
     public $locationId;
     public $locationType;
     public $typeId;
+    public $quantity;
 }

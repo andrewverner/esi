@@ -3,12 +3,15 @@
 namespace ESC\core;
 
 use ESC\core\sorter\ISorter;
-use ESC\ESI;
 use ESC\request\characters\CharacterAgentsResearchGetRequest;
 use ESC\request\characters\CharacterAssetsGetRequest;
 use ESC\request\characters\CharacterAssetsLocationsPostRequest;
+use ESC\request\characters\CharacterAssetsNamesPostRequest;
 use ESC\request\characters\CharacterBlueprintsGetRequest;
+use ESC\request\characters\CharacterBookmarksFoldersGetRequest;
 use ESC\request\characters\CharacterBookmarksGetRequest;
+use ESC\request\characters\CharacterCalendarEventAttendeesGetRequest;
+use ESC\request\characters\CharacterCalendarEventGetRequest;
 use ESC\request\characters\CharacterCalendarGetRequest;
 use ESC\request\characters\CharacterChatChannelsGetRequest;
 use ESC\request\characters\CharacterContactsNotificationsGetRequest;
@@ -17,31 +20,16 @@ use ESC\request\characters\CharacterFatigueGetRequest;
 use ESC\request\characters\CharacterMedalsGetRequest;
 use ESC\request\characters\CharacterNotificationsGetRequest;
 use ESC\request\characters\CharacterGetRequest;
+use ESC\request\characters\CharacterPortraitGetRequest;
 use ESC\request\characters\CharacterRolesGetRequest;
 use ESC\request\characters\CharactersNamesGetRequest;
 use ESC\request\characters\CharacterStandingsGetRequest;
+use ESC\request\characters\CharacterStatsGetRequest;
 
-class CharacterFacade implements ICharacterFacade
+//@todo CSPA POST
+
+class CharactersFacade extends EVEFacade implements ICharactersFacade
 {
-    private $id;
-    private $token;
-    private $esi;
-
-    public function __construct($id = null, $token = null)
-    {
-        $this->id = $id;
-        $this->token = $token;
-        $this->esi = ESI::app();
-    }
-
-    public function setId($id) {
-        $this->id = $id;
-    }
-
-    public function setToken($token) {
-        $this->token = $token;
-    }
-
     public function names(array $ids)
     {
         return $this->esi->rest->call(new CharactersNamesGetRequest($ids));
@@ -113,13 +101,48 @@ class CharacterFacade implements ICharacterFacade
         return $this->esi->rest->authorizedCall(new CharacterBookmarksGetRequest($this->id, $sorter), $this->token);
     }
 
+    public function bookmarksFolders(ISorter $sorter = null)
+    {
+        return $this->esi->rest->authorizedCall(new CharacterBookmarksFoldersGetRequest($this->id, $sorter), $this->token);
+    }
+
     public function calendar()
     {
         return $this->esi->rest->authorizedCall(new CharacterCalendarGetRequest($this->id), $this->token);
     }
 
+    public function calendarEvent($eventId)
+    {
+        return $this->esi->rest->authorizedCall(new CharacterCalendarEventGetRequest($this->id, $eventId), $this->token);
+    }
+
+    //@todo PUT
+    public function calendarEventResponse($eventId) {}
+
+    public function calendarEventAttendees($eventId)
+    {
+        return $this->esi->rest->authorizedCall(new CharacterCalendarEventAttendeesGetRequest($this->id, $eventId), $this->token);
+    }
+
     public function assetsLocations(array $ids)
     {
         return $this->esi->rest->authorizedCall(new CharacterAssetsLocationsPostRequest($this->id, $ids), $this->token);
+    }
+
+    public function assetsNames(array $ids)
+    {
+        return $this->esi->rest->authorizedCall(new CharacterAssetsNamesPostRequest($this->id, $ids), $this->token);
+    }
+
+    public function portraits($characterId = null, $size = null)
+    {
+        $response = $this->esi->rest->call(new CharacterPortraitGetRequest($characterId ?: $this->id));
+        return $size ? $response->{$size} : $response;
+    }
+
+    //@todo stats response struct @_@
+    public function stats()
+    {
+        return $this->esi->rest->authorizedCall(new CharacterStatsGetRequest($this->id), $this->token);
     }
 }

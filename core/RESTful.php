@@ -11,7 +11,7 @@ class RESTful
 {
     private $logger;
 
-    public function call(Request $request)
+    public function call(Request $request, array $headers = [])
     {
         $this->getLogger()->log('Call ' . get_class($request) . "[{$request->getType()}:{$request->getUrl()}]");
 
@@ -22,6 +22,10 @@ class RESTful
         $cURL->method($request->getType());
         if ($request->getType() == Request::METHOD_POST && !empty($request->getData())) {
             $cURL->data($request->getData());
+            $headers[] = 'Content-Type: application/json';
+        }
+        if (!empty($headers)) {
+            $cURL->header($headers);
         }
         $response = $cURL->send($request->getUrl());
 
@@ -30,19 +34,11 @@ class RESTful
 
     public function authorizedCall(Request $request, $accessToken)
     {
-        $this->getLogger()->log('Authorized call ' . get_class($request) . "[{$request->getType()}:{$request->getUrl()}]");
+        $headers = [
+            "Authorization: Bearer {$accessToken}"
+        ];
 
-        /**
-         * @var $cURL cURL
-         */
-        $cURL = ESI::app()->curl;
-        $response = $cURL->method($request->getType())
-            ->header([
-                "Authorization: Bearer {$accessToken}"
-            ])
-            ->send($request->getUrl());
-
-        return $request->response($response);
+        return $this->call($request, $headers);
     }
 
     private function getLogger()

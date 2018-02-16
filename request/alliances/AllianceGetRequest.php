@@ -1,6 +1,6 @@
 <?php
 
-namespace ESC\request\alliance;
+namespace ESC\request\alliances;
 
 use ESC\request\Request;
 use ESC\response\alliances\AllianceGetResponse;

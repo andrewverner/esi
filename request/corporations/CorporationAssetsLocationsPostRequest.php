@@ -6,17 +6,17 @@
  * Time: 18:17
  */
 
-namespace ESC\request\characters;
+namespace ESC\request\corporations;
 
 use ESC\request\Request;
 
-class CharacterAssetsLocationsPostRequest extends Request
+class CorporationAssetsLocationsPostRequest extends Request
 {
     public $type = Request::METHOD_POST;
 
     public function __construct($id, array $ids)
     {
-        $this->url = "/characters/{$id}/assets/locations/";
+        $this->url = "/corporations/{$id}/assets/locations/";
         $this->data = json_encode($ids);
     }
 }

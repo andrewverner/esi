@@ -34,7 +34,7 @@ class cURL
 
     public function send($url)
     {
-        $this->getLogger()->log('Sending request');
+        $this->getLogger()->log('Sending request. URL: ' . $url);
 
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -79,7 +79,7 @@ class cURL
     private function getLogger()
     {
         if (is_null($this->logger)) {
-            $this->logger = new Logger(new LoggerFileTransport());
+            $this->logger = new Logger(new LoggerFileTransport('/var/log/esi/'));
         }
 
         return $this->logger;
