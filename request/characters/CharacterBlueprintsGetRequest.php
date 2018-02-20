@@ -4,7 +4,7 @@ namespace ESC\request\characters;
 
 use ESC\core\sorter\ISorter;
 use ESC\request\Request;
-use ESC\response\struct\CharacterBlueprintScruct;
+use ESC\response\struct\BlueprintScruct;
 
 class CharacterBlueprintsGetRequest extends Request
 {
@@ -16,6 +16,6 @@ class CharacterBlueprintsGetRequest extends Request
 
     public function response($data)
     {
-        return $this->responseList($data, CharacterBlueprintScruct::class);
+        return $this->responseList($data, BlueprintScruct::class);
     }
 }

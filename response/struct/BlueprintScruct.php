@@ -2,7 +2,7 @@
 
 namespace ESC\response\struct;
 
-class CharacterBlueprintScruct extends Struct
+class BlueprintScruct extends Struct
 {
     public $itemId;
     public $locationFlag;

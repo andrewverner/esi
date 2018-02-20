@@ -16,6 +16,7 @@ spl_autoload_register(function ($className) {
             'request/corporations',
             'response/alliances',
             'response/characters',
+            'response/corporations',
             'response/struct',
             'core/logger',
             'core/sorter'
@@ -23,6 +24,7 @@ spl_autoload_register(function ($className) {
         foreach ($dirs as $dir) {
             if (file_exists(getcwd() . "/{$dir}/{$className}.php")) {
                 require_once getcwd() . "/{$dir}/{$className}.php";
+                continue;
             }
         }
     }
@@ -67,7 +69,8 @@ if (isset($_REQUEST['code'])) {
     //print_r($character->assets());
     //print_r($character->assetsLocations([1016499019528, 1794091545, 899694798]));
     //print_r($character->assetsNames([1782876119, 1006192138849, 1022538575080]));
-    print_r($character->stats());
+    //print_r($character->stats());
+    //print_r($character->affiliation([656916134, 534122154, 523375194, 653213313, 90230044]));
 
     /*Header("Location: " . \ESC\ESI::app()->oauth->auth([
             'characterContactsRead',
@@ -95,6 +98,9 @@ if (isset($_REQUEST['code'])) {
     //print_r($alliancesFacade->details());
     //print_r($alliancesFacade->corporations());
     //print_r($alliancesFacade->icons());
+
+    $corporation = new \ESC\core\CorporationsFacade(98482170);
+    print_r($corporation->details());
 }
 
 //var_dump(\ESC\ESI::app()->rest->call(new \ESC\request\alliances\AlliancesGetRequest()));

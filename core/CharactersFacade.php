@@ -3,6 +3,7 @@
 namespace ESC\core;
 
 use ESC\core\sorter\ISorter;
+use ESC\request\characters\CharacterAffiliationPostRequest;
 use ESC\request\characters\CharacterAgentsResearchGetRequest;
 use ESC\request\characters\CharacterAssetsGetRequest;
 use ESC\request\characters\CharacterAssetsLocationsPostRequest;
@@ -15,6 +16,9 @@ use ESC\request\characters\CharacterCalendarEventGetRequest;
 use ESC\request\characters\CharacterCalendarGetRequest;
 use ESC\request\characters\CharacterChatChannelsGetRequest;
 use ESC\request\characters\CharacterContactsNotificationsGetRequest;
+use ESC\request\characters\CharacterContractBidsGetRequest;
+use ESC\request\characters\CharacterContractItemsGetRequest;
+use ESC\request\characters\CharacterContractsGetRequest;
 use ESC\request\characters\CharacterCorporationHistoryGetRequest;
 use ESC\request\characters\CharacterFatigueGetRequest;
 use ESC\request\characters\CharacterMedalsGetRequest;
@@ -37,8 +41,7 @@ class CharactersFacade extends EVEFacade implements ICharactersFacade
 
     public function details($id = null)
     {
-        $id = $id ?: $this->id;
-        return $this->esi->rest->call(new CharacterGetRequest($id));
+        return $this->esi->rest->call(new CharacterGetRequest($id ?: $this->id));
     }
 
     public function agentsResearch()
@@ -144,5 +147,25 @@ class CharactersFacade extends EVEFacade implements ICharactersFacade
     public function stats()
     {
         return $this->esi->rest->authorizedCall(new CharacterStatsGetRequest($this->id), $this->token);
+    }
+
+    public function affiliation(array $ids)
+    {
+        return $this->esi->rest->call(new CharacterAffiliationPostRequest($ids));
+    }
+
+    public function contracts()
+    {
+        return $this->esi->rest->authorizedCall(new CharacterContractsGetRequest($this->id), $this->token);
+    }
+
+    public function contractBids($contractId)
+    {
+        return $this->esi->rest->authorizedCall(new CharacterContractBidsGetRequest($this->id, $contractId), $this->token);
+    }
+
+    public function contractItems($contractId)
+    {
+        return $this->esi->rest->authorizedCall(new CharacterContractItemsGetRequest($this->id, $contractId), $this->token);
     }
 }
