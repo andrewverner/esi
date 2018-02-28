@@ -6,5 +6,5 @@ use ESC\request\Request;
 
 class AlliancesGetRequest extends Request
 {
-    public $url = '/alliances/';
+    protected $url = '/alliances/';
 }

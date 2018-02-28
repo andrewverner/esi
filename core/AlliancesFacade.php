@@ -8,7 +8,7 @@ use ESC\request\alliances\AllianceIconsGetRequest;
 use ESC\request\alliances\AlliancesGetRequest;
 use ESC\request\alliances\AlliancesNamesGetRequest;
 
-class AlliancesFacade extends EVEFacade implements IAlliancesFacade
+class AlliancesFacade extends CommonFacade implements IAlliancesFacade
 {
     public function alliances()
     {

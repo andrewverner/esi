@@ -14,9 +14,13 @@ spl_autoload_register(function ($className) {
             'request/alliances',
             'request/characters',
             'request/corporations',
+            'request/eve',
+            'request/eve/dogma',
             'response/alliances',
             'response/characters',
             'response/corporations',
+            'response/eve',
+            'response/eve/dogma',
             'response/struct',
             'core/logger',
             'core/sorter'
@@ -45,12 +49,12 @@ MSG;
 if (isset($_REQUEST['code'])) {
     print_r(\ESC\ESI::app()->oauth->getToken($_REQUEST['code']));
 } elseif (isset($_REQUEST['token'])) {
-    print_r(\ESC\ESI::app()->oauth->refreshToken('RFiIRts48D4kMYhG6cv9-3Yn5GI0N7BZ7iZvhpUauSpjQqhO37w_3N7DTWoaJJb9AivsLwXND0fzqA86tPesWn1omlA5SXyT0Gv78KfsXT6WSOgKPtdthqFHkmrk4Fgx0'));
+    print_r(\ESC\ESI::app()->oauth->refreshToken(''));
 } elseif (isset($_REQUEST['access_token'])) {
     print_r(\ESC\ESI::app()->oauth->getCharacterID($_REQUEST['access_token']));
 } else {
     $character = new \ESC\core\CharactersFacade(656916134);
-    $character->setToken('282uO9_eu_jKt3bT3g6KhmUyFuzJik6pygQB8oMG-PSYjZ4el6XrmFhSCJgEbsFYtvoUVHLonVCIpCSg479trw2');
+    $character->setToken('');
     //$character->details();
     //$character->names([656916134, 534122154, 523375194, 653213313, 90230044]);
     //$character->setId(656916134);
@@ -99,8 +103,15 @@ if (isset($_REQUEST['code'])) {
     //print_r($alliancesFacade->corporations());
     //print_r($alliancesFacade->icons());
 
-    $corporation = new \ESC\core\CorporationsFacade(98482170);
-    print_r($corporation->details());
+    /*$corporation = new \ESC\core\CorporationsFacade();
+    foreach ($corporation->npcCorporations() as $npcCorporationId) {
+
+    }*/
+
+    $eve = new \ESC\core\EVEFacade();
+    foreach (array_slice($eve->dogmaEffects(), 0, 25) as $effectId) {
+        print_r($eve->dogmaEffect($effectId));
+    }
 }
 
 //var_dump(\ESC\ESI::app()->rest->call(new \ESC\request\alliances\AlliancesGetRequest()));

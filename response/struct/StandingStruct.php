@@ -2,7 +2,7 @@
 
 namespace ESC\response\struct;
 
-class CharacterStandingStruct extends Struct
+class StandingStruct extends Struct
 {
     public $fromId;
     public $fromType;

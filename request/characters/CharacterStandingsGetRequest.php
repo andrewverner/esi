@@ -3,7 +3,7 @@
 namespace ESC\request\characters;
 
 use ESC\request\Request;
-use ESC\response\struct\CharacterStandingStruct;
+use ESC\response\struct\StandingStruct;
 
 class CharacterStandingsGetRequest extends Request
 {
@@ -14,6 +14,6 @@ class CharacterStandingsGetRequest extends Request
 
     public function response($data)
     {
-        return $this->responseList($data, CharacterStandingStruct::class);
+        return $this->responseList($data, StandingStruct::class);
     }
 }

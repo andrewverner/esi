@@ -23,9 +23,26 @@ use ESC\request\corporations\CorporationDivisionsGetRequest;
 use ESC\request\corporations\CorporationFacilitiesGetRequest;
 use ESC\request\corporations\CorporationGetRequest;
 use ESC\request\corporations\CorporationIconsGetRequest;
+use ESC\request\corporations\CorporationIssuedMedalsGetRequest;
 use ESC\request\corporations\CorporationMedalsGetRequest;
+use ESC\request\corporations\CorporationMembersGetRequest;
+use ESC\request\corporations\CorporationMembersLimitGetRequest;
+use ESC\request\corporations\CorporationMembersTitlesGetRequest;
+use ESC\request\corporations\CorporationMemberTrackingGetRequest;
+use ESC\request\corporations\CorporationOutpostGetRequest;
+use ESC\request\corporations\CorporationOutpostsGetRequest;
+use ESC\request\corporations\CorporationRolesGetRequest;
+use ESC\request\corporations\CorporationRolesHistoryGetRequest;
+use ESC\request\corporations\CorporationShareHoldersGetRequest;
+use ESC\request\corporations\CorporationsNamesGetRequest;
+use ESC\request\corporations\CorporationStandingsGetRequest;
+use ESC\request\corporations\CorporationStarBaseGetRequest;
+use ESC\request\corporations\CorporationStarBasesGetRequest;
+use ESC\request\corporations\CorporationStructuresGetRequest;
+use ESC\request\corporations\CorporationTitlesGetRequest;
+use ESC\request\corporations\NPCCorporationsGetRequest;
 
-class CorporationsFacade extends EVEFacade implements ICorporationsFacade
+class CorporationsFacade extends CommonFacade implements ICorporationsFacade
 {
     public function assets()
     {
@@ -105,5 +122,90 @@ class CorporationsFacade extends EVEFacade implements ICorporationsFacade
     public function medals()
     {
         return $this->esi->rest->authorizedCall(new CorporationMedalsGetRequest($this->id), $this->token);
+    }
+
+    public function issuedMedals()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationIssuedMedalsGetRequest($this->id), $this->token);
+    }
+
+    public function members()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationMembersGetRequest($this->id), $this->token);
+    }
+
+    public function membersLimit()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationMembersLimitGetRequest($this->id), $this->token);
+    }
+
+    public function membersTitles()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationMembersTitlesGetRequest($this->id), $this->token);
+    }
+
+    public function membersTracking()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationMemberTrackingGetRequest($this->id), $this->token);
+    }
+
+    public function outposts()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationOutpostsGetRequest($this->id), $this->token);
+    }
+
+    public function outpost($outpostId)
+    {
+        return $this->esi->rest->authorizedCall(new CorporationOutpostGetRequest($this->id, $outpostId), $this->token);
+    }
+
+    public function roles()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationRolesGetRequest($this->id), $this->token);
+    }
+
+    public function rolesHistory()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationRolesHistoryGetRequest($this->id), $this->token);
+    }
+
+    public function shareHolders()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationShareHoldersGetRequest($this->id), $this->token);
+    }
+
+    public function standings()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationStandingsGetRequest($this->id), $this->token);
+    }
+
+    public function starBases()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationStarBasesGetRequest($this->id), $this->token);
+    }
+
+    public function starBase($starBaseId)
+    {
+        return $this->esi->rest->authorizedCall(new CorporationStarBaseGetRequest($this->id, $starBaseId), $this->token);
+    }
+
+    public function structures()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationStructuresGetRequest($this->id), $this->token);
+    }
+
+    public function titles()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationTitlesGetRequest($this->id), $this->token);
+    }
+
+    public function names(array $ids)
+    {
+        return $this->esi->rest->call(new CorporationsNamesGetRequest($ids));
+    }
+
+    public function npcCorporations()
+    {
+        return $this->esi->rest->call(new NPCCorporationsGetRequest());
     }
 }

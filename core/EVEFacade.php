@@ -2,32 +2,36 @@
 /**
  * Created by PhpStorm.
  * User: denis
- * Date: 16.02.18
- * Time: 12:59
+ * Date: 28.02.18
+ * Time: 17:33
  */
 
 namespace ESC\core;
 
-use ESC\ESI;
+use ESC\request\eve\dogma\EveDogmaAttributeGetRequest;
+use ESC\request\eve\dogma\EveDogmaAttributesGetRequest;
+use ESC\request\eve\dogma\EveDogmaEffectGetRequest;
+use ESC\request\eve\dogma\EveDogmaEffectsGetRequest;
 
-class EVEFacade
+class EVEFacade extends CommonFacade
 {
-    protected $id;
-    protected $token;
-    protected $esi;
-
-    public function __construct($id = null, $token = null)
+    public function dogmaAttributes()
     {
-        $this->id = $id;
-        $this->token = $token;
-        $this->esi = ESI::app();
+        return $this->esi->rest->call(new EveDogmaAttributesGetRequest());
     }
 
-    public function setId($id) {
-        $this->id = $id;
+    public function dogmaAttribute($attributeId)
+    {
+        return $this->esi->rest->call(new EveDogmaAttributeGetRequest($attributeId));
     }
 
-    public function setToken($token) {
-        $this->token = $token;
+    public function dogmaEffects()
+    {
+        return $this->esi->rest->call(new EveDogmaEffectsGetRequest());
+    }
+
+    public function dogmaEffect($effectId)
+    {
+        return $this->esi->rest->call(new EveDogmaEffectGetRequest($effectId));
     }
 }

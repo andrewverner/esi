@@ -32,7 +32,7 @@ use ESC\request\characters\CharacterStatsGetRequest;
 
 //@todo CSPA POST
 
-class CharactersFacade extends EVEFacade implements ICharactersFacade
+class CharactersFacade extends CommonFacade implements ICharactersFacade
 {
     public function names(array $ids)
     {
