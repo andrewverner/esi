@@ -8,18 +8,17 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
 use ESC\response\corporations\CorporationOutpostResponse;
 
-class CorporationOutpostGetRequest extends Request
+class CorporationOutpostGetRequest extends CorporationRequest
 {
+    protected $url = '/corporations/{corporation_id}/outposts/{outpost_id}/';
+    protected $responseType = self::RESPONSE_TYPE_SINGLE;
+    protected $responseInstanceType = CorporationOutpostResponse::class;
+
     public function __construct($corporationId, $outpostId)
     {
-        $this->url = "/corporations/{$corporationId}/outposts/{$outpostId}/";
-    }
-
-    public function response($data)
-    {
-        return new CorporationOutpostResponse($data);
+        parent::__construct($corporationId);
+        $this->url = str_replace('{outpost_id}', $outpostId, $this->url);
     }
 }

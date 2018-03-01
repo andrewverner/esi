@@ -19,9 +19,5 @@ class AllianceGetResponse extends Response
     public $dateFounded;
     public $executorCorporationId;
 
-    public function __construct($data)
-    {
-        parent::__construct($data);
-        $this->dateFounded = new \DateTime($this->dateFounded);
-    }
+    protected $dateTimeProps = ['dateFounded'];
 }

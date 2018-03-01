@@ -33,14 +33,8 @@ class ContractStruct extends Struct
     public $buyout;
     public $volume;
 
-    public function __construct($data)
-    {
-        parent::__construct($data);
-        if ($this->dateAccepted) {
-            $this->dateAccepted = new \DateTime($this->dateAccepted);
-        }
-        if ($this->dateCompleted) {
-            $this->dateCompleted = new \DateTime($this->dateCompleted);
-        }
-    }
+    protected $dateTimeProps = [
+        'dateAccepted',
+        'dateCompleted'
+    ];
 }

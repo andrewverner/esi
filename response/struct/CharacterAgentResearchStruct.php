@@ -10,9 +10,5 @@ class CharacterAgentResearchStruct extends Struct
     public $skillTypeId;
     public $startedAt;
 
-    public function __construct($data)
-    {
-        parent::__construct($data);
-        $this->startedAt = new \DateTime($this->startedAt);
-    }
+    protected $dateTimeProps = ['startedAt'];
 }

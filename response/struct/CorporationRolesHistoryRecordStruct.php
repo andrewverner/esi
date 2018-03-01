@@ -17,9 +17,5 @@ class CorporationRolesHistoryRecordStruct extends Struct
     public $oldRoles;
     public $newRoles;
 
-    public function __construct($data)
-    {
-        parent::__construct($data);
-        $this->changedAt = new \DateTime($this->changedAt);
-    }
+    protected $dateTimeProps = ['changedAt'];
 }

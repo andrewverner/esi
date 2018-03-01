@@ -2,12 +2,8 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
-
-class CharacterRolesGetRequest extends Request
+class CharacterRolesGetRequest extends CharacterRequest
 {
-    public function __construct($characterId)
-    {
-        $this->url = "/characters/{$characterId}/roles/";
-    }
+    protected $url = '/characters/{character_id}/roles/';
+    protected $responseType = self::RESPONSE_TYPE_RAW;
 }

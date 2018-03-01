@@ -2,18 +2,11 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
 use ESC\response\characters\CharacterJumpClonesResponse;
 
-class CharacterJumpClonesGetRequest extends Request
+class CharacterJumpClonesGetRequest extends CharacterRequest
 {
-    public function __construct($characterId)
-    {
-        $this->url = "/characters/{$characterId}/clones/";
-    }
-
-    public function response($data)
-    {
-        return new CharacterJumpClonesResponse($data);
-    }
+    protected $url = '/characters/{character_id}/clones/';
+    protected $responseType = self::RESPONSE_TYPE_SINGLE;
+    protected $responseInstanceType = CharacterJumpClonesResponse::class;
 }

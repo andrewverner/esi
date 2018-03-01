@@ -2,18 +2,11 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
 use ESC\response\characters\CharacterFatigueResponse;
 
-class CharacterFatigueGetRequest extends Request
+class CharacterFatigueGetRequest extends CharacterRequest
 {
-    public function __construct($characterId)
-    {
-        $this->url = "/characters/{$characterId}/fatigue/";
-    }
-
-    public function response($data)
-    {
-        return new CharacterFatigueResponse($data);
-    }
+    protected $url = '/characters/{character_id}/fatigue/';
+    protected $responseType = self::RESPONSE_TYPE_SINGLE;
+    protected $responseInstanceType = CharacterFatigueResponse::class;
 }

@@ -8,18 +8,17 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
 use ESC\response\struct\ContractBidStruct;
 
-class CharacterContractBidsGetRequest extends Request
+class CharacterContractBidsGetRequest extends CharacterRequest
 {
+    protected $url = '/characters/{character_id}/contracts/{contract_id}/bids/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = ContractBidStruct::class;
+
     public function __construct($characterId, $contractId)
     {
-        $this->url = "/characters/{$characterId}/contracts/{$contractId}/bids/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, ContractBidStruct::class);
+        parent::__construct($characterId);
+        $this->url = str_replace('{contract_id}', $contractId, $this->url);
     }
 }

@@ -2,18 +2,11 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
 use ESC\response\struct\CharacterAgentResearchStruct;
 
-class CharacterAgentsResearchGetRequest extends Request
+class CharacterAgentsResearchGetRequest extends CharacterRequest
 {
-    public function __construct($characterId)
-    {
-        $this->url = "/characters/{$characterId}/agents_research/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, CharacterAgentResearchStruct::class);
-    }
+    protected $url = '/characters/{character_id}/agents_research/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = CharacterAgentResearchStruct::class;
 }

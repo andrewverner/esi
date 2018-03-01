@@ -8,18 +8,11 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
 use ESC\response\struct\CorporationRolesHistoryRecordStruct;
 
-class CorporationRolesHistoryGetRequest extends Request
+class CorporationRolesHistoryGetRequest extends CorporationRequest
 {
-    public function __construct($corporationId)
-    {
-        $this->url = "/corporations/{$corporationId}/roles/history/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, CorporationRolesHistoryRecordStruct::class);
-    }
+    protected $url = '/corporations/{corporation_id}/roles/history/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = CorporationRolesHistoryRecordStruct::class;
 }

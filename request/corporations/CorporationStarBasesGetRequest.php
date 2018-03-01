@@ -8,18 +8,11 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
 use ESC\response\struct\CorporationStarBaseStruct;
 
-class CorporationStarBasesGetRequest extends Request
+class CorporationStarBasesGetRequest extends CorporationRequest
 {
-    public function __construct($corporationId)
-    {
-        $this->url = "/corporations/{$corporationId}/starbases/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, CorporationStarBaseStruct::class);
-    }
+    protected $url = '/corporations/{corporation_id}/starbases/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = CorporationStarBaseStruct::class;
 }

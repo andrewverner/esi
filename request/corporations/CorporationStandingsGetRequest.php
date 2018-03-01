@@ -8,18 +8,11 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
 use ESC\response\struct\StandingStruct;
 
-class CorporationStandingsGetRequest extends Request
+class CorporationStandingsGetRequest extends CorporationRequest
 {
-    public function __construct($corporationId)
-    {
-        $this->url = "/corporations/{$corporationId}/standings/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, StandingStruct::class);
-    }
+    protected $url = '/corporations/{corporation_id}/standings/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = StandingStruct::class;
 }

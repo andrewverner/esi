@@ -2,18 +2,11 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
 use ESC\response\struct\CharacterNotificationStruct;
 
-class CharacterNotificationsGetRequest extends Request
+class CharacterNotificationsGetRequest extends CharacterRequest
 {
-    public function __construct($characterId)
-    {
-        $this->url = "/characters/{$characterId}/notifications/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, CharacterNotificationStruct::class);
-    }
+    protected $url = '/characters/{character_id}/notifications/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = CharacterNotificationStruct::class;
 }

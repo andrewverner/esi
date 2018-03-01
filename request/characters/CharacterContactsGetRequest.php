@@ -2,17 +2,11 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
+use ESC\response\struct\CharacterContactStruct;
 
-class CharacterContactsGetRequest extends Request
+class CharacterContactsGetRequest extends CharacterRequest
 {
-    public function __construct($characterId)
-    {
-        $this->url = "/characters/{$characterId}/contacts/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, 'CharacterContactStruct');
-    }
+    protected $url = '/characters/{character_id}/contacts/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = CharacterContactStruct::class;
 }

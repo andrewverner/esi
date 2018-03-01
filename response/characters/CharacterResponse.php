@@ -15,9 +15,5 @@ class CharacterResponse extends Response
     public $name;
     public $raceId;
 
-    public function __construct($data)
-    {
-        parent::__construct($data);
-        $this->birthday = new \DateTime($this->birthday);
-    }
+    protected $dateTimeProps = ['birthday'];
 }

@@ -2,18 +2,11 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
 use ESC\response\characters\CharacterResponse;
 
-class CharacterGetRequest extends Request
+class CharacterGetRequest extends CharacterRequest
 {
-    public function __construct($characterId)
-    {
-        $this->url = "/characters/{$characterId}/";
-    }
-
-    public function response($data)
-    {
-        return new CharacterResponse($data);
-    }
+    protected $url = '/characters/{character_id}/';
+    protected $responseType = self::RESPONSE_TYPE_SINGLE;
+    protected $responseInstanceType = CharacterResponse::class;
 }

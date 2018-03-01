@@ -8,21 +8,11 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
 use ESC\response\struct\ContractStruct;
 
-class CharacterContractsGetRequest extends Request
+class CharacterContractsGetRequest extends CharacterRequest
 {
-    private $characterId;
-
-    public function __construct($characterId)
-    {
-        $this->url = "/characters/{$characterId}/contracts/";
-        $this->characterId = $characterId;
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, ContractStruct::class);
-    }
+    protected $url = '/characters/{character_id}/contracts/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = ContractStruct::class;
 }

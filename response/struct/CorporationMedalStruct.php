@@ -16,9 +16,5 @@ class CorporationMedalStruct extends Struct
     public $creatorId;
     public $createdAt;
 
-    public function __construct($data)
-    {
-        parent::__construct($data);
-        $this->createdAt = new \DateTime($this->createdAt);
-    }
+    protected $dateTimeProps = ['createdAt'];
 }

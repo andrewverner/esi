@@ -10,9 +10,5 @@ class CharacterContactNotificationStruct extends Struct
     public $senderCharacterId;
     public $standingLevel;
 
-    public function __construct($data)
-    {
-        parent::__construct($data);
-        $this->sendDate = new \DateTime($this->sendDate);
-    }
+    protected $dateTimeProps = ['sendDate'];
 }

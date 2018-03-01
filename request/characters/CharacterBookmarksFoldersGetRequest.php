@@ -3,14 +3,15 @@
 namespace ESC\request\characters;
 
 use ESC\core\sorter\ISorter;
-use ESC\request\Request;
-use ESC\response\struct\BookmarkStruct;
 
-class CharacterBookmarksFoldersGetRequest extends Request
+class CharacterBookmarksFoldersGetRequest extends CharacterRequest
 {
+    protected $url = '/characters/{character_id}/bookmarks/folders/';
+    protected $responseType = self::RESPONSE_TYPE_RAW;
+
     public function __construct($characterId, ISorter $sorter = null)
     {
-        $this->url = "/characters/{$characterId}/bookmarks/folders/";
+        parent::__construct($characterId);
         $this->sorter = $sorter;
     }
 }

@@ -8,18 +8,11 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
 use ESC\response\struct\CorporationTitleStruct;
 
-class CorporationTitlesGetRequest extends Request
+class CorporationTitlesGetRequest extends CorporationRequest
 {
-    public function __construct($corporationId)
-    {
-        $this->url = "/corporations/{$corporationId}/titles/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, CorporationTitleStruct::class);
-    }
+    protected $url = '/corporations/{corporation_id}/titles/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = CorporationTitleStruct::class;
 }

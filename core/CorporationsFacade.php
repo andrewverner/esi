@@ -23,12 +23,16 @@ use ESC\request\corporations\CorporationDivisionsGetRequest;
 use ESC\request\corporations\CorporationFacilitiesGetRequest;
 use ESC\request\corporations\CorporationGetRequest;
 use ESC\request\corporations\CorporationIconsGetRequest;
+use ESC\request\corporations\CorporationIndustryJobsGetRequest;
 use ESC\request\corporations\CorporationIssuedMedalsGetRequest;
 use ESC\request\corporations\CorporationMedalsGetRequest;
 use ESC\request\corporations\CorporationMembersGetRequest;
 use ESC\request\corporations\CorporationMembersLimitGetRequest;
 use ESC\request\corporations\CorporationMembersTitlesGetRequest;
 use ESC\request\corporations\CorporationMemberTrackingGetRequest;
+use ESC\request\corporations\CorporationMiningExtractionsGetRequest;
+use ESC\request\corporations\CorporationMiningObserverGetRequest;
+use ESC\request\corporations\CorporationMiningObserversGetRequest;
 use ESC\request\corporations\CorporationOutpostGetRequest;
 use ESC\request\corporations\CorporationOutpostsGetRequest;
 use ESC\request\corporations\CorporationRolesGetRequest;
@@ -207,5 +211,25 @@ class CorporationsFacade extends CommonFacade implements ICorporationsFacade
     public function npcCorporations()
     {
         return $this->esi->rest->call(new NPCCorporationsGetRequest());
+    }
+
+    public function miningExtractors()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationMiningExtractionsGetRequest($this->id), $this->token);
+    }
+
+    public function miningObservers()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationMiningObserversGetRequest($this->id), $this->token);
+    }
+
+    public function miningObserver($observerId)
+    {
+        return $this->esi->rest->authorizedCall(new CorporationMiningObserverGetRequest($this->id, $observerId), $this->token);
+    }
+
+    public function industryJobs()
+    {
+        return $this->esi->rest->authorizedCall(new CorporationIndustryJobsGetRequest($this->id), $this->token);
     }
 }

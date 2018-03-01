@@ -8,18 +8,11 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
 use ESC\response\struct\CorporationShareHolderStruct;
 
-class CorporationShareHoldersGetRequest extends Request
+class CorporationShareHoldersGetRequest extends CorporationRequest
 {
-    public function __construct($corporationId)
-    {
-        $this->url = "/corporations/{$corporationId}/shareholders/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, CorporationShareHolderStruct::class);
-    }
+    protected $url = '/corporations/{corporation_id}/shareholders/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = CorporationShareHolderStruct::class;
 }

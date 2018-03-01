@@ -2,18 +2,11 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
 use ESC\response\struct\StandingStruct;
 
-class CharacterStandingsGetRequest extends Request
+class CharacterStandingsGetRequest extends CharacterRequest
 {
-    public function __construct($characterId)
-    {
-        $this->url = "/characters/{$characterId}/standings/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, StandingStruct::class);
-    }
+    protected $url = '/characters/{character_id}/standings/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = StandingStruct::class;
 }

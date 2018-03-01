@@ -2,17 +2,11 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
+use ESC\response\struct\CalendarRecordStruct;
 
-class CharacterCalendarGetRequest extends Request
+class CharacterCalendarGetRequest extends CharacterRequest
 {
-    public function __construct($characterId)
-    {
-        $this->url = "/characters/{$characterId}/calendar/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, 'CalendarRecordStruct');
-    }
+    protected $url = '/characters/{character_id}/calendar/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = CalendarRecordStruct::class;
 }

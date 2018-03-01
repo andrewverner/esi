@@ -13,9 +13,5 @@ class BookmarkStruct extends Struct
     public $ownerId;
     public $target;
 
-    public function __construct($data)
-    {
-        parent::__construct($data);
-        $this->createDate = new \DateTime($this->createDate);
-    }
+    protected $dateTimeProps = ['createDate'];
 }

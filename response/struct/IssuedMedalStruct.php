@@ -17,9 +17,5 @@ class IssuedMedalStruct extends Struct
     public $issuerId;
     public $issuedAt;
 
-    public function __construct($data)
-    {
-        parent::__construct($data);
-        $this->issuedAt = new \DateTime($this->issuedAt);
-    }
+    protected $dateTimeProps = ['issuedAt'];
 }

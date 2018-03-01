@@ -8,18 +8,11 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
 use ESC\response\struct\MemberTrackingStruct;
 
-class CorporationMemberTrackingGetRequest extends Request
+class CorporationMemberTrackingGetRequest extends CorporationRequest
 {
-    public function __construct($corporationId)
-    {
-        $this->url = "/corporations/{$corporationId}/membertracking/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, MemberTrackingStruct::class);
-    }
+    protected $url = '/corporations/{corporation_id}/membertracking/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = MemberTrackingStruct::class;
 }

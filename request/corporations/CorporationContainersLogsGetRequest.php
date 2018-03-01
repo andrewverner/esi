@@ -8,18 +8,11 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
 use ESC\response\struct\ContainerLogRecordStruct;
 
-class CorporationContainersLogsGetRequest extends Request
+class CorporationContainersLogsGetRequest extends CorporationRequest
 {
-    public function __construct($corporationId)
-    {
-        $this->url = "/corporations/{$corporationId}/containers/logs/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, ContainerLogRecordStruct::class);
-    }
+    protected $url = '/corporations/{corporation_id}/containers/logs/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = ContainerLogRecordStruct::class;
 }

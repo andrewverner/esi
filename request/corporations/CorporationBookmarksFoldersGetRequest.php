@@ -3,13 +3,15 @@
 namespace ESC\request\corporations;
 
 use ESC\core\sorter\ISorter;
-use ESC\request\Request;
 
-class CorporationBookmarksFoldersGetRequest extends Request
+class CorporationBookmarksFoldersGetRequest extends CorporationRequest
 {
-    public function __construct($characterId, ISorter $sorter = null)
+    protected $url = '/corporations/{corporation_id}/bookmarks/folders/';
+    protected $responseType = self::RESPONSE_TYPE_RAW;
+
+    public function __construct($corporationId, ISorter $sorter = null)
     {
-        $this->url = "/corporations/{$characterId}/bookmarks/folders/";
+        parent::__construct($corporationId);
         $this->sorter = $sorter;
     }
 }

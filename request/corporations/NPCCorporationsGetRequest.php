@@ -8,9 +8,8 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
-
-class NPCCorporationsGetRequest extends Request
+class NPCCorporationsGetRequest extends CorporationRequest
 {
     protected $url = "/corporations/npccorps/";
+    protected $responseType = self::RESPONSE_TYPE_RAW;
 }

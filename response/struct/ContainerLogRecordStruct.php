@@ -23,9 +23,5 @@ class ContainerLogRecordStruct extends Struct
     public $oldConfigBitmask;
     public $newConfigBitmask;
 
-    public function __construct($data)
-    {
-        parent::__construct($data);
-        $this->loggedAt = new \DateTime($this->loggedAt);
-    }
+    protected $dateTimeProps = ['loggedAt'];
 }

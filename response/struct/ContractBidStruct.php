@@ -15,9 +15,5 @@ class ContractBidStruct extends Struct
     public $dateBid;
     public $amount;
 
-    public function __construct($data)
-    {
-        parent::__construct($data);
-        $this->dateBid = new \DateTime($this->dateBid);
-    }
+    protected $dateTimeProps = ['dateBid'];
 }

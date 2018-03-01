@@ -8,12 +8,8 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
-
-class CorporationMembersLimitGetRequest extends Request
+class CorporationMembersLimitGetRequest extends CorporationRequest
 {
-    public function __construct($corporationId)
-    {
-        $this->url = "/corporations/{$corporationId}/members/limit/";
-    }
+    protected $url = '/corporations/{corporation_id}/members/limit/';
+    protected $responseType = self::RESPONSE_TYPE_RAW;
 }

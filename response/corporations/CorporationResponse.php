@@ -26,11 +26,5 @@ class CorporationResponse extends Response
     public $homeStationId;
     public $shares;
 
-    public function __construct($data)
-    {
-        parent::__construct($data);
-        if ($this->dateFounded) {
-            $this->dateFounded = new \DateTime($this->dateFounded);
-        }
-    }
+    protected $dateTimeProps = ['dateFounded'];
 }

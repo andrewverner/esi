@@ -3,19 +3,17 @@
 namespace ESC\request\corporations;
 
 use ESC\core\sorter\ISorter;
-use ESC\request\Request;
 use ESC\response\struct\BookmarkStruct;
 
-class CorporationBookmarksGetRequest extends Request
+class CorporationBookmarksGetRequest extends CorporationRequest
 {
-    public function __construct($characterId, ISorter $sorter = null)
-    {
-        $this->url = "/corporations/{$characterId}/bookmarks/";
-        $this->sorter = $sorter;
-    }
+    protected $url = '/corporations/{corporation_id}/bookmarks/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = BookmarkStruct::class;
 
-    public function response($data)
+    public function __construct($corporationId, ISorter $sorter = null)
     {
-        return $this->responseList($data, BookmarkStruct::class);
+        parent::__construct($corporationId);
+        $this->sorter = $sorter;
     }
 }

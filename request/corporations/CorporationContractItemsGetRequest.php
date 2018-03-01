@@ -8,19 +8,17 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
-use ESC\response\struct\ContractBidStruct;
 use ESC\response\struct\ContractItemStruct;
 
-class CorporationContractItemsGetRequest extends Request
+class CorporationContractItemsGetRequest extends CorporationRequest
 {
+    protected $url = '/corporations/{corporation_id}/contracts/{contract_id}/items/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = ContractItemStruct::class;
+
     public function __construct($corporationId, $contractId)
     {
-        $this->url = "/corporations/{$corporationId}/contracts/{$contractId}/items/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, ContractItemStruct::class);
+        parent::__construct($corporationId);
+        $this->url = str_replace('{contract_id}', $contractId, $this->url);
     }
 }

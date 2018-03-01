@@ -8,18 +8,11 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
 use ESC\response\struct\IssuedMedalStruct;
 
-class CorporationIssuedMedalsGetRequest extends Request
+class CorporationIssuedMedalsGetRequest extends CorporationRequest
 {
-    public function __construct($corporationId)
-    {
-        $this->url = "/corporations/{$corporationId}/medals/issued/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, IssuedMedalStruct::class);
-    }
+    protected $url = '/corporations/{corporation_id}/medals/issued/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = IssuedMedalStruct::class;
 }

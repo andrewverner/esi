@@ -2,18 +2,11 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
 use ESC\response\struct\CharacterMedalStruct;
 
-class CharacterMedalsGetRequest extends Request
+class CharacterMedalsGetRequest extends CharacterRequest
 {
-    public function __construct($characterId)
-    {
-        $this->url = "/characters/{$characterId}/medals/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, CharacterMedalStruct::class);
-    }
+    protected $url = '/characters/{character_id}/medals/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = CharacterMedalStruct::class;
 }

@@ -3,19 +3,17 @@
 namespace ESC\request\characters;
 
 use ESC\core\sorter\ISorter;
-use ESC\request\Request;
 use ESC\response\struct\AssetStruct;
 
-class CharacterAssetsGetRequest extends Request
+class CharacterAssetsGetRequest extends CharacterRequest
 {
+    protected $url = '/characters/{character_id}/assets/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = AssetStruct::class;
+
     public function __construct($characterId, ISorter $sorter = null)
     {
-        $this->url = "/characters/{$characterId}/assets/";
+        parent::__construct($characterId);
         $this->sorter = $sorter;
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, AssetStruct::class);
     }
 }

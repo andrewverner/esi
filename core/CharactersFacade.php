@@ -21,7 +21,10 @@ use ESC\request\characters\CharacterContractItemsGetRequest;
 use ESC\request\characters\CharacterContractsGetRequest;
 use ESC\request\characters\CharacterCorporationHistoryGetRequest;
 use ESC\request\characters\CharacterFatigueGetRequest;
+use ESC\request\characters\CharacterFittingsGetRequest;
+use ESC\request\characters\CharacterIndustryJobsGetRequest;
 use ESC\request\characters\CharacterMedalsGetRequest;
+use ESC\request\characters\CharacterMiningGetRequest;
 use ESC\request\characters\CharacterNotificationsGetRequest;
 use ESC\request\characters\CharacterGetRequest;
 use ESC\request\characters\CharacterPortraitGetRequest;
@@ -59,9 +62,9 @@ class CharactersFacade extends CommonFacade implements ICharactersFacade
         return $this->esi->rest->authorizedCall(new CharacterChatChannelsGetRequest($this->id), $this->token);
     }
 
-    public function corporationHistory()
+    public function corporationHistory($id = null)
     {
-        return $this->esi->rest->call(new CharacterCorporationHistoryGetRequest($this->id));
+        return $this->esi->rest->call(new CharacterCorporationHistoryGetRequest($id ?: $this->id));
     }
 
     public function fatigue()
@@ -167,5 +170,21 @@ class CharactersFacade extends CommonFacade implements ICharactersFacade
     public function contractItems($contractId)
     {
         return $this->esi->rest->authorizedCall(new CharacterContractItemsGetRequest($this->id, $contractId), $this->token);
+    }
+
+    //@todo POST, DELETE
+    public function fittings()
+    {
+        return $this->esi->rest->authorizedCall(new CharacterFittingsGetRequest($this->id), $this->token);
+    }
+
+    public function industryJobs()
+    {
+        return $this->esi->rest->authorizedCall(new CharacterIndustryJobsGetRequest($this->id), $this->token);
+    }
+
+    public function mining()
+    {
+        return $this->esi->rest->authorizedCall(new CharacterMiningGetRequest($this->id), $this->token);
     }
 }

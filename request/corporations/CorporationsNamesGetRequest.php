@@ -8,12 +8,14 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
-
-class CorporationsNamesGetRequest extends Request
+class CorporationsNamesGetRequest extends CorporationRequest
 {
+    protected $url = '/corporations/names/';
+    protected $responseType = self::RESPONSE_TYPE_RAW;
+
     public function __construct(array $ids)
     {
-        $this->url .= '/corporations/names/?corporation_ids=' . implode(',', $ids);
+        parent::__construct();
+        $this->url .= '?corporation_ids=' . implode(',', $ids);
     }
 }

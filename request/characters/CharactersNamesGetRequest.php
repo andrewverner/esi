@@ -2,12 +2,13 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
-
-class CharactersNamesGetRequest extends Request
+class CharactersNamesGetRequest extends CharacterRequest
 {
+    protected $url = '/characters/names/';
+    protected $responseType = self::RESPONSE_TYPE_RAW;
+
     public function __construct(array $ids)
     {
-        $this->url .= '/characters/names/?character_ids=' . implode(',', $ids);
+        $this->url .= '?character_ids=' . implode(',', $ids);
     }
 }

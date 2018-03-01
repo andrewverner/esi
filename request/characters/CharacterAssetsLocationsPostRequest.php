@@ -10,13 +10,16 @@ namespace ESC\request\characters;
 
 use ESC\request\Request;
 
-class CharacterAssetsLocationsPostRequest extends Request
+class CharacterAssetsLocationsPostRequest extends CharacterRequest
 {
     public $type = Request::METHOD_POST;
 
-    public function __construct($id, array $ids)
+    protected $url = '/characters/{character_id}/assets/locations/';
+    protected $responseType = self::RESPONSE_TYPE_RAW;
+
+    public function __construct($characterId, array $ids)
     {
-        $this->url = "/characters/{$id}/assets/locations/";
+        parent::__construct($characterId);
         $this->data = json_encode($ids);
     }
 }

@@ -10,13 +10,16 @@ namespace ESC\request\corporations;
 
 use ESC\request\Request;
 
-class CorporationAssetsNamesPostRequest extends Request
+class CorporationAssetsNamesPostRequest extends CorporationRequest
 {
     public $type = Request::METHOD_POST;
 
-    public function __construct($id, array $ids)
+    protected $url = '/corporations/{corporation_id}/assets/names/';
+    protected $responseType = self::RESPONSE_TYPE_RAW;
+
+    public function __construct($corporationId, array $ids)
     {
-        $this->url = "/corporations/{$id}/assets/names/";
+        parent::__construct($corporationId);
         $this->data = json_encode($ids);
     }
 }

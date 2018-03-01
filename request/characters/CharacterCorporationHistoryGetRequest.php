@@ -2,18 +2,11 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
 use ESC\response\struct\CharacterCorporationHistoryRecordStruct;
 
-class CharacterCorporationHistoryGetRequest extends Request
+class CharacterCorporationHistoryGetRequest extends CharacterRequest
 {
-    public function __construct($characterId)
-    {
-        $this->url = "/characters/{$characterId}/corporationhistory/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, CharacterCorporationHistoryRecordStruct::class);
-    }
+    protected $url = '/characters/{character_id}/corporationhistory/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = CharacterCorporationHistoryRecordStruct::class;
 }

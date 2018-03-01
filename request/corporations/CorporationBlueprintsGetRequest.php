@@ -8,18 +8,11 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
 use ESC\response\struct\BlueprintScruct;
 
-class CorporationBlueprintsGetRequest extends Request
+class CorporationBlueprintsGetRequest extends CorporationRequest
 {
-    public function __construct($corporationId)
-    {
-        $this->url = "/corporations/{$corporationId}/blueprints/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, BlueprintScruct::class);
-    }
+    protected $url = '/corporations/{corporation_id}/blueprints/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = BlueprintScruct::class;
 }

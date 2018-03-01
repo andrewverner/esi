@@ -11,10 +11,16 @@ class Request
     const METHOD_POST = 'POST';
     const METHOD_DELETE = 'DELETE';
 
+    const RESPONSE_TYPE_RAW = 1;
+    const RESPONSE_TYPE_SINGLE = 2;
+    const RESPONSE_TYPE_LIST = 3;
+
     private $host = 'https://esi.tech.ccp.is/latest';
     protected $url;
     protected $type = 'GET';
     protected $data = [];
+    protected $responseType = self::RESPONSE_TYPE_RAW;
+    protected $responseInstanceType;
 
     /**
      * @var ISorter
@@ -38,7 +44,17 @@ class Request
 
     public function response($data)
     {
-        return $data;
+        switch ($this->responseType) {
+            case self::RESPONSE_TYPE_SINGLE:
+                $instance = $this->responseInstanceType;
+                return new $instance($data);
+                break;
+            case self::RESPONSE_TYPE_LIST:
+                return $this->responseList($data, $this->responseInstanceType);
+                break;
+            default:
+                return $data;
+        }
     }
 
     protected function responseList($data, $instance)

@@ -8,12 +8,8 @@
 
 namespace ESC\request\characters;
 
-use ESC\request\Request;
-
-class CharacterStatsGetRequest extends Request
+class CharacterStatsGetRequest extends CharacterRequest
 {
-    public function __construct($characterId)
-    {
-        $this->url = "/characters/{$characterId}/stats/";
-    }
+    protected $url = '/characters/{character_id}/stats/';
+    protected $responseType = self::RESPONSE_TYPE_RAW;
 }

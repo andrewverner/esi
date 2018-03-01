@@ -19,17 +19,9 @@ class CorporationStarBaseStruct extends Struct
     public $reinforcedUntil;
     public $onlinedSince;
 
-    public function __construct($data)
-    {
-        parent::__construct($data);
-        if ($this->unanchorAt) {
-            $this->unanchorAt = new \DateTime($this->unanchorAt);
-        }
-        if ($this->reinforcedUntil) {
-            $this->reinforcedUntil = new \DateTime($this->reinforcedUntil);
-        }
-        if ($this->onlinedSince) {
-            $this->onlinedSince = new \DateTime($this->onlinedSince);
-        }
-    }
+    protected $dateTimeProps = [
+        'unanchorAt',
+        'reinforcedUntil',
+        'onlinedSince'
+    ];
 }

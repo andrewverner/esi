@@ -11,18 +11,16 @@ namespace ESC\request\characters;
 use ESC\request\Request;
 use ESC\response\struct\CharacterAffiliationStruct;
 
-class CharacterAffiliationPostRequest extends Request
+class CharacterAffiliationPostRequest extends CharacterRequest
 {
     public $type = Request::METHOD_POST;
 
+    protected $url = '/characters/affiliation/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = CharacterAffiliationStruct::class;
+
     public function __construct(array $ids)
     {
-        $this->url = "/characters/affiliation/";
         $this->data = json_encode($ids);
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, CharacterAffiliationStruct::class);
     }
 }

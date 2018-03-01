@@ -8,18 +8,11 @@
 
 namespace ESC\request\corporations;
 
-use ESC\request\Request;
 use ESC\response\struct\AssetStruct;
 
-class CorporationAssetsGetRequest extends Request
+class CorporationAssetsGetRequest extends CorporationRequest
 {
-    public function __construct($id)
-    {
-        $this->url = "/corporations/{$id}/assets/";
-    }
-
-    public function response($data)
-    {
-        return $this->responseList($data, AssetStruct::class);
-    }
+    protected $url = '/corporations/{corporation_id}/assets/';
+    protected $responseType = self::RESPONSE_TYPE_LIST;
+    protected $responseInstanceType = AssetStruct::class;
 }
