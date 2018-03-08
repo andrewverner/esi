@@ -9,7 +9,7 @@
       "email": "denis.khodakovskiy@gmail.com"
     }
   ],
-  "minimum-stability": "dev-master",
+  "minimum-stability": "dev",
   "require": {
     "php": ">=7.0.22"
   },
