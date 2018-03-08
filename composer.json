@@ -2,7 +2,7 @@
   "name": "denis.khodakovskiy/esi",
   "description": "EVE Swagger Interface PHP Package",
   "type": "package",
-  "license": "GNU",
+  "license": "AGPL-3.0-only",
   "authors": [
     {
       "name": "Denis Khodakovskiy",
