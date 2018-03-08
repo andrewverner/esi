@@ -1,0 +1,21 @@
+{
+  "name": "denis.khodakovskiy/esi",
+  "description": "EVE Swagger Interface PHP Package",
+  "type": "package",
+  "license": "GNU",
+  "authors": [
+    {
+      "name": "Denis Khodakovskiy",
+      "email": "denis.khodakovskiy@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.0.22"
+  },
+  "autoload": {
+    "psr-0": {
+      "ESI": "/"
+    }
+  }
+}
